@@ -1,36 +1,91 @@
+/* LandingPage.scss */
+
+/* Landing page container */
 .landing-page {
-  min-height: 100vh;
+  height: 100%;
   padding: 2rem;
 }
 
+/* Landing page header */
 .landing-page__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
+.landing-page__header img {
+  max-width: 200px;
+}
+
+.landing-page__header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.landing-page__header p {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Landing page features */
 .landing-page__features {
-  row-gap: 2rem;
+  margin: 3rem 0;
 }
 
 .landing-page__feature {
+  display: flex;
+  justify-content: center;
+}
+
+.landing-page__card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 400px;
   text-align: center;
 }
 
+.landing-page__card i {
+  color: #f9826c;
+}
+
+.landing-page__card h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.landing-page__card p {
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Landing page footer */
 .landing-page__footer {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  height: 100%;
+  align-items: center;
+  height: 4rem;
 }
 
 .landing-page__login-btn {
-  background-color: #007bff;
+  background-color: #f9826c;
+  border: none;
+  border-radius: 2rem;
   color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
   text-decoration: none;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s ease-in-out;
+}
 
-  &:hover {
-    background-color: #0056b3;
-  }
+.landing-page__login-btn:hover {
+  background-color: #ff8e78;
 }
