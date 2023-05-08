@@ -1,0 +1,36 @@
+.landing-page {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.landing-page__header {
+  text-align: center;
+}
+
+.landing-page__features {
+  row-gap: 2rem;
+}
+
+.landing-page__feature {
+  text-align: center;
+}
+
+.landing-page__footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.landing-page__login-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
