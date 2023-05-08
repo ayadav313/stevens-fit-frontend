@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import LandingPage from './components/landingPage/LandingPage.js';
-// import LoginSignUpPage from './components/loginSignUpPage/LoginSignUpPage';
+import LoginSignUpPage from './components/loginSignUpPage/LoginSignUpPage';
 // import Dashboard from './components/dashboard/Dashboard';
 // import ExerciseCatalog from './components/exerciseCatalog/ExerciseCatalog';
 // import WorkoutCatalog from './components/workoutCatalog/WorkoutCatalog';
@@ -18,8 +18,8 @@ function App() {
       <div className="app">
         <Routes>
           <Route exact path="/" element={<LandingPage/>} />
-          {/* <Route path="/login" component={LoginSignUpPage} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/login" element={<LoginSignUpPage/>} />
+          {/*<Route path="/dashboard" component={Dashboard} />
           <Route path="/exercise-catalog" component={ExerciseCatalog} />
           <Route path="/workout-catalog" component={WorkoutCatalog} />
           <Route path="/workout-tracker" component={WorkoutTracker} />
