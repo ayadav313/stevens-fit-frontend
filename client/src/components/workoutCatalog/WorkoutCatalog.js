@@ -8,27 +8,77 @@ import './WorkoutCatalog.scss';
 // TODO: use exercise component from before to display them
 
 // TODO: add start button to start a workout
+// const fetchExercise = async (exerciseId) => {
+//   try {
+//     const response = await fetch(`http://localhost:3000/exercises/${exerciseId}`);
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
+
+//     const exerciseData = await response.json();
+//     return exerciseData;
+//   } catch (error) {
+//     console.error(`Failed to fetch exercise ${exerciseId}:`, error);
+//     throw error;
+//   }
+// };
+const fetchExercise = async (exerciseId) => {
+  const dummyExercises = {
+    '612db8f48a7c18bf22004b0a': {
+      _id: '612db8f48a7c18bf22004b0a',
+      name: 'Push-ups',
+    },
+    '612db8f48a7c18bf22004b0b': {
+      _id: '612db8f48a7c18bf22004b0b',
+      name: 'Squats',
+    },
+  };
+
+  return dummyExercises[exerciseId];
+};
+
 
 const Workout = ({ workout }) => {
+  const [exercises, setExercises] = useState([]);
+
+  useEffect(() => {
+    const fetchExercises = async () => {
+      const fetchedExercises = await Promise.all(
+        workout.exerciseLogs.map(async (log) => await fetchExercise(log.exerciseId))
+      );
+      setExercises(fetchedExercises);
+    };
+  
+    fetchExercises();
+  }, [workout.exerciseLogs]);
+  
   return (
     <div className="workout-item card">
       <h4 className="card-header">{workout.name}</h4>
       <div className="card-body">
         <p>Creator: {workout.creator}</p>
         <h5>Exercises:</h5>
-        <ul>
-          {workout.exerciseLogs.map((log, index) => (
-            <li key={index}>
-              <p>Exercise ID: {log.exerciseId}</p>
-              <p>Sets: {log.sets}</p>
-              <p>Reps: {log.reps}</p>
-              <p>Additional Details: {log.additionalDetails}</p>
+        <ul className="list-unstyled">
+          {exercises.map((exercise, index) => (
+            <li key={index} className="mb-3">
+              <h6>{exercise.name}</h6>
+              <p>
+                Sets: <strong>{workout.exerciseLogs[index].sets}</strong>, Reps:{" "}
+                <strong>{workout.exerciseLogs[index].reps}</strong>
+              </p>
+              {workout.exerciseLogs[index].additionalDetails && (
+                <p className="text-muted">
+                  <em>{workout.exerciseLogs[index].additionalDetails}</em>
+                </p>
+              )}
             </li>
           ))}
         </ul>
       </div>
     </div>
   );
+  
 };
 
 const WorkoutCatalog = () => {

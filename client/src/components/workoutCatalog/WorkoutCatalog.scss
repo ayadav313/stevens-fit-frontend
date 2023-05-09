@@ -1,15 +1,17 @@
-/* WorkoutCatalog.scss */
-.workout-item {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 1rem;
-    margin: 1rem;
-    width: 250px;
-    cursor: pointer;
-    transition: 0.3s;
+.workout-catalog {
+  padding: 2rem;
+
+  .workouts-list {
+    margin-top: 1rem;
   }
-  
-  .workout-item:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  .workout-item {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
   }
-  
+}
