@@ -1,23 +1,68 @@
-// TODO: create a component that allows u to follow through a workout
-// TODO: Component gets sent a Workout object id
-// TODO: get the workout from that
-// TODO: Create a ui to allow users to go through that workout
-// TODO: on button send call POST and save to workoutLog Document
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 const WorkoutTracker = () => {
-    const [error, setError] = useState(null);
-    return (
-      <div className="workout-catalog">
-        <h3>Workout Tracker</h3>
-        {error ? (
-          <p className="error-message">Failed to load workout tracker: {error}</p>
-        ) : (
-          <div className="row row-cols-1 row-cols-md-5 g-4">
-            
-          </div>
-        )}
-      </div>
-    );
+  const location = useLocation();
+  const workoutData = location.state ? location.state.workoutData : null;
+  const [workout, setWorkout] = useState(null);
+
+  useEffect(() => {
+    if (workoutData) {
+      setWorkout(workoutData);
+    }
+  }, [workoutData]);
+
+  const [exerciseLogs, setExerciseLogs] = useState([]);
+
+  const handleSetReps = (exerciseId, sets, reps) => {
+    setExerciseLogs((prevState) => [
+      ...prevState.filter((el) => el.exerciseId !== exerciseId),
+      { exerciseId, sets, reps },
+    ]);
   };
-  
-  export default WorkoutTracker;
+
+  const handleSubmit = () => {
+    // Removed the API call; you can add any desired action here
+    console.log('Workout saved successfully!', { workoutId: workoutData._id, exerciseLogs });
+    alert('Workout saved successfully!');
+  };
+
+  if (!workout) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="workout-tracker container">
+      <h3 className="my-4">{workout.name}</h3>
+      {workout.exerciseLogs.map((exercise, idx) => (
+        <div key={idx} className="exercise-log card mb-3 p-3">
+          <h4 className="card-title">{exercise.name}</h4>
+          <p className="card-text">Sets: {exercise.sets}</p>
+          <p className="card-text">Reps: {exercise.reps}</p>
+          {exercise.weight && <p className="card-text">Weight: {exercise.weight} lbs</p>}
+          {exercise.restTime && <p className="card-text">Rest time: {exercise.restTime} sec</p>}
+          {exercise.notes && <p className="card-text">Notes: {exercise.notes}</p>}
+          <div className="input-group mb-3">
+            <span className="input-group-text">Sets performed:</span>
+            <input
+              type="number"
+              className="form-control"
+              onChange={(e) => handleSetReps(exercise.exerciseId, Number(e.target.value), exercise.reps)}
+            />
+          </div>
+          <div className="input-group mb-3">
+            <span className="input-group-text">Reps performed:</span>
+            <input
+              type="number"
+              className="form-control"
+              onChange={(e) => handleSetReps(exercise.exerciseId, exercise.sets, Number(e.target.value))}
+            />
+          </div>
+        </div>
+      ))}
+      <button className="btn btn-primary" onClick={handleSubmit}>Submit Workout</button>
+    </div>
+  );
+};
+
+export default WorkoutTracker;

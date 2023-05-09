@@ -1,28 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './WorkoutCatalog.scss';
+import { useNavigate } from 'react-router-dom';
 
-// TODO: make it look good
-
-// TODO: get exercises via ID from array
-
-// TODO: use exercise component from before to display them
-
-// TODO: add start button to start a workout
-// const fetchExercise = async (exerciseId) => {
-//   try {
-//     const response = await fetch(`http://localhost:3000/exercises/${exerciseId}`);
-
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
-
-//     const exerciseData = await response.json();
-//     return exerciseData;
-//   } catch (error) {
-//     console.error(`Failed to fetch exercise ${exerciseId}:`, error);
-//     throw error;
-//   }
-// };
 const fetchExercise = async (exerciseId) => {
   const dummyExercises = {
     '612db8f48a7c18bf22004b0a': {
@@ -39,8 +18,21 @@ const fetchExercise = async (exerciseId) => {
 };
 
 
+
+// Replace the Link component with a button
+
+
+
 const Workout = ({ workout }) => {
   const [exercises, setExercises] = useState([]);
+
+    // Inside the Workout component
+    const navigate = useNavigate();
+
+    const startWorkout = () => {
+      navigate('/workout-tracker', { state: { workoutData: workout } });
+    };
+
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -74,7 +66,11 @@ const Workout = ({ workout }) => {
               )}
             </li>
           ))}
+          
         </ul>
+        <button className="btn btn-primary" onClick={startWorkout}>
+  Start
+</button>
       </div>
     </div>
   );
@@ -165,3 +161,20 @@ const WorkoutCatalog = () => {
 };
 
 export default WorkoutCatalog;
+
+
+// const fetchExercise = async (exerciseId) => {
+//   try {
+//     const response = await fetch(`http://localhost:3000/exercises/${exerciseId}`);
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! Status: ${response.status}`);
+//     }
+
+//     const exerciseData = await response.json();
+//     return exerciseData;
+//   } catch (error) {
+//     console.error(`Failed to fetch exercise ${exerciseId}:`, error);
+//     throw error;
+//   }
+// };

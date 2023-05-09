@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ExerciseCatalog.scss';
 
-// TODO: Search by body part, target, or equipment
-
 // TODO: export exercise component to be used in other places
 
 const Exercise = ({ exercise }) => {

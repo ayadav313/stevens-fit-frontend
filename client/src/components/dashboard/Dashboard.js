@@ -33,17 +33,13 @@ const Dashboard = () => {
     navigate('/workout-catalog');
   };
 
-  const handleWorkoutTracker = () => {
-    navigate('/workout-tracker');
-  };
-
   return (
     <div className="dashboard d-flex flex-column align-items-center vh-100">
       <div className="card w-75">
         <div className="card-body">
           <h2 className="card-title text-center">Welcome!</h2>
           <div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
-            <button onClick={handleWorkoutTracker} className="btn btn-primary mb-2 mb-md-0 mr-md-2">
+            <button onClick={handleWorkoutCatalog} className="btn btn-primary mb-2 mb-md-0 mr-md-2">
               <FontAwesomeIcon icon={faRunning} className="mr-2" />
               Start Workout
             </button>
