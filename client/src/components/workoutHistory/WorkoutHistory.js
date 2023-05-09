@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const workoutLogsDummy = [
+const workoutLogs = [
   {
     _id: '90g0d5e96h1234567890abcd',
     userId: '60f8a4872d1234567890abcd',
@@ -51,25 +51,32 @@ const workoutStatsDummy = {
   ],
 };
 
+const WorkoutHistoryItem = ({log}) => {
+  const date = new Date(log.date).toLocaleDateString();
+  const exerciseList = log.exerciseLogs.map((exercise, index) => (
+    <li key={index}>
+      <strong>{exercise.name}</strong>: {exercise.sets} sets x {exercise.reps} reps
+    </li>
+  ));
+
+  return (
+    <div className="workout-history-item">
+      <h3>{date}</h3>
+      <ul>{exerciseList}</ul>
+    </div>
+  );
+};
+
+
 const WorkoutHistory = () => {
   return (
     <div className="workout-history">
       <h2>Workout History</h2>
-      {workoutLogsDummy.map((log) => (
-        <div key={log._id} className="workout-log">
-          <h3>{new Date(log.date).toLocaleDateString()}</h3>
-          {log.exerciseLogs.map((exercise, idx) => (
-            <div key={idx} className="exercise-log">
-              <h4>{exercise.name}</h4>
-              <p>Sets: {exercise.sets}</p>
-              <p>Reps: {exercise.reps}</p>
-              {exercise.notes && <p>Notes: {exercise.notes}</p>}
-            </div>
-          ))}
-        </div>
+      {workoutLogs.map((log) => (
+        <WorkoutHistoryItem key={log._id} log={log} />
       ))}
 
-      <h2>Workout Statistics</h2>
+      {/* <h2>Workout Statistics</h2>
       <div className="graphs">
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
@@ -95,9 +102,9 @@ const WorkoutHistory = () => {
             <Bar dataKey="count" fill="#8884d8" />
           </BarChart>
         </ResponsiveContainer>
-      </div>
+      </div> */}
     </div>
   );
 };
 
-export default WorkoutHistory
+export default WorkoutHistory;

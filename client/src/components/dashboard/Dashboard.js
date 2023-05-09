@@ -4,18 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dashboard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faDumbbell,
+  faHistory,
   faSignOutAlt,
   faCalendarPlus,
   faRunning,
 } from '@fortawesome/free-solid-svg-icons';
-// Import your components here, for example:
-import ExerciseCatalog from '../exerciseCatalog/ExerciseCatalog';
-import WorkoutTracker from '../workoutTracker/WorkoutTracker';
-// import WorkoutCatalog from './WorkoutCatalog';
-// import SocialPlatform from './SocialPlatform';
-// import Calendar from './Calendar';
-import WorkoutHistory from '../workoutHistory/WorkoutHistory';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -33,37 +26,47 @@ const Dashboard = () => {
     navigate('/workout-catalog');
   };
 
+  const handleWorkoutHistory = () => {
+    navigate('/workout-history');
+  };
   return (
-    <div className="dashboard d-flex flex-column align-items-center vh-100">
-      <div className="card w-75">
-        <div className="card-body">
-          <h2 className="card-title text-center">Welcome!</h2>
-          <div className="d-flex flex-column flex-md-row justify-content-center align-items-center">
-            <button onClick={handleWorkoutCatalog} className="btn btn-primary mb-2 mb-md-0 mr-md-2">
-              <FontAwesomeIcon icon={faRunning} className="mr-2" />
-              Start Workout
+    <div className="dashboard d-flex flex-column align-items-center justify-content-center vh-100">
+        <h1 className='m-5'>Welcome!</h1>
+        <div className="d-flex flex-row">
+          <div className="d-flex flex-column align-items-center mx-4">
+            <button onClick={handleWorkoutCatalog} className="btn btn-primary btn-icon btn-lg my-4">
+              <FontAwesomeIcon icon={faRunning} />
             </button>
+            <span>Start Workout</span>
+          </div>
+          <div className="d-flex flex-column align-items-center mx-4">
             <a
               href="https://stevensrec.com/sports/2021/12/21/dse-capacity.aspx"
               target="_blank"
               rel="noreferrer"
-              className="btn btn-secondary mb-2 mb-md-0 mr-md-2"
+              className="btn btn-secondary btn-icon btn-lg my-4"
             >
-              <FontAwesomeIcon icon={faCalendarPlus} className="mr-2" />
-              Book appointment at UCC Gym!
+              <FontAwesomeIcon icon={faCalendarPlus} />
             </a>
-            <button onClick={handleSignOut} className="btn btn-danger">
-              <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
-              Sign Out
-            </button>
+            <span>Book appointment at UCC Gym!</span>
           </div>
-          {/* TODO: <SocialPlatform /> /}
-          {/* TODO: <Calendar /> */}
+          <div className="d-flex flex-column align-items-center mx-4">
+            <button onClick={handleWorkoutHistory} className="btn btn-secondary btn-icon btn-lg my-4">
+              <FontAwesomeIcon icon={faHistory} />
+            </button>
+            <span>Workout History</span>
+          </div>
+          <div className="d-flex flex-column align-items-center mx-4">
+            <button onClick={handleSignOut} className="btn btn-danger btn-icon btn-lg my-4">
+              <FontAwesomeIcon icon={faSignOutAlt} />
+            </button>
+            <span>Sign Out</span>
+          </div>
         </div>
-      </div>
-      <WorkoutHistory />
     </div>
   );
-};
+  
+  
+  }  
 
 export default Dashboard;

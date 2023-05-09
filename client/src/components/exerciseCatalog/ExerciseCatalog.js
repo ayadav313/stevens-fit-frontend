@@ -1,37 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './ExerciseCatalog.scss';
-
-// TODO: export exercise component to be used in other places
-
-const Exercise = ({ exercise }) => {
-  const [showDetails, setShowDetails] = useState(false);
-
-  const toggleDetails = () => {
-    setShowDetails(!showDetails);
-  };
-
-
-  return (
-    <div className="exercise-item card" onClick={toggleDetails}>
-      <h4 className="card-header">{exercise.name}</h4>
-      <div className="card-body" style={{ display: showDetails ? 'block' : 'none' }}>
-        <p className="exercise-details">Target: {exercise.target}</p>
-        <p className="exercise-details">Body Part: {exercise.bodyPart}</p>
-        <p className="exercise-details">Equipment: {exercise.equipment}</p>
-        <img src={exercise.gifUrl} alt={exercise.name} className="img-fluid" />
-        {/* Add any additional exercise information here */}
-      </div>
-    </div>
-  );
-};
-
+import Exercise from '../common/Exercise'
 
 const ExerciseCatalog = () => {
   const [exercises, setExercises] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-
-  
 
   const fetchExercises = async () => {
     try {
@@ -64,6 +38,7 @@ const ExerciseCatalog = () => {
     exercise.target.toLowerCase().includes(searchTerm.toLowerCase()) ||
     exercise.equipment.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   return (
     <div className="exercise-catalog container-fluid">
       <h3 className="text-center mb-3">Exercise Catalog</h3>
