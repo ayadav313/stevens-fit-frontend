@@ -5,9 +5,12 @@ import './Header.scss';
 const Header = () => {
   return (
     <header className="header">
-      {/* TODO make header-title h1 element clickable and route to / */}
-      <h1 className="header-title">Stevens Fit</h1>
-      {/* TODO: put subtext to the header-title: here is the subtext: The Ultimate Fitness App for Stevens Students */}
+      <div className="header-title-container">
+        <NavLink to="/" className="header-title-link">
+          <h1 className="header-title">Stevens Fit</h1>
+        </NavLink>
+        <p className="header-subtext">The Ultimate Fitness App for Stevens Students</p>
+      </div>
       <nav className="header-nav">
         <ul className="nav-links d-flex flex-column flex-md-row align-items-center justify-content-md-between">
           <li>

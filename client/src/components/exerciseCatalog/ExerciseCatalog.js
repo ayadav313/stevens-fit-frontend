@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './ExerciseCatalog.scss';
 
+// TODO: Search by body part, target, or equipment
+
 const Exercise = ({ exercise }) => {
   const [showDetails, setShowDetails] = useState(false);
 
