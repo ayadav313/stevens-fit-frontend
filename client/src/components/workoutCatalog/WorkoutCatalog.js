@@ -129,6 +129,12 @@ const WorkoutCatalog = () => {
             reps: 12,
             additionalDetails: "Rest one minute between sets",
           },
+          {
+            exerciseId: "612db8f48a7c18bf22004b0b",
+            sets: 4,
+            reps: 12,
+            additionalDetails: "Rest one minute between sets",
+          },
         ],
       },
     ];
