@@ -1,0 +1,23 @@
+/* Exercise.scss */
+.exercise-item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    width: 250px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .exercise-item:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .exercise-details {
+    display: none;
+  }
+  
+  .exercise-item.expanded .exercise-details {
+    display: block;
+  }
+  
