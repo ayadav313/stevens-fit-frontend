@@ -9,7 +9,8 @@ const LandingPage = () => {
   return (
     <div className="landing-page d-flex flex-column">
       <header className="landing-page__header mb-5">
-      {/* <img src={logo} alt="Logo" className="mb-3" /> */}
+      <img src={logo} alt="Logo" className="mb-3" />
+      <p>The Ultimate Fitness App for Stevens Students</p>
       </header>
 
       <section className="landing-page__features row gx-5 gy-5">

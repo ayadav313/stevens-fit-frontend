@@ -8,6 +8,7 @@ import ExerciseCatalog from './components/exerciseCatalog/ExerciseCatalog';
 
 import WorkoutCatalog from './components/workoutCatalog/WorkoutCatalog';
 import WorkoutTracker from './components/workoutTracker/WorkoutTracker';
+import WorkoutHistory from './components/workoutHistory/WorkoutHistory'
 // import SocialPlatform from './components/socialPlatform/SocialPlatform';
 // import Calendar from './components/calendar/Calendar';
 
@@ -17,6 +18,7 @@ import Header from './components/Header/Header';
 function App() {
   return (
     <Router>
+      {/* TODO: HIDE HEADER IF ON LANDING PAGE OR LOGINSIGNUP PAGE*/}
       <Header/>
       <div className="app">
         <Routes>
@@ -24,8 +26,9 @@ function App() {
           <Route path="/login" element={<LoginSignUpPage/>} />
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="/exercise-catalog" element={<ExerciseCatalog/>} />
-          {/* <Route path="/workout-catalog" element={<WorkoutCatalog/>} /> */}
+          <Route path="/workout-catalog" element={<WorkoutCatalog/>} />
           <Route path="/workout-tracker" element={<WorkoutTracker/>} />
+          <Route path='/workout-history' element={<WorkoutHistory/>} />
           {/* />
           />
           

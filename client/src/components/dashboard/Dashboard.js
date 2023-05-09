@@ -25,30 +25,42 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard d-flex flex-column justify-content-center align-items-center vh-100">
+    <div className="dashboard d-flex flex-column align-items-center vh-100">
       <div className="card w-75">
         <div className="card-body">
+          
+          <h2 className="card-title text-center">Welcome!</h2>
+
           <div className="d-flex justify-content-end">
             <button onClick={handleExerciseCatalog} className="btn btn-link">
               Exercise Catalog <FontAwesomeIcon icon={faDumbbell} size="2x" />
             </button>
-          </div>
-          <h2 className="card-title text-center">Dashboard</h2>
-          <p>Welcome to your dashboard!</p>
-          {/* Add your dashboard components here, for example: */}
-          
-          {/* {<WorkoutTracker />} */}
+            {/* TODO: FA button to workout catalog, SAME AS ABOVE */}   
+            <p>Workout Catalog</p>
 
-          {/* {<ExerciseCatalog /> */}
+            {/* TODO: START workout button which goes to workout tracker */}
+            <p>Start workout button</p>
+
+            {/* TODO: link to UCC signup for gym */}
+            <p>Link to the UCC gym</p>
+            
+            <button onClick={handleSignOut} className="btn btn-primary mt-3">
+              Sign Out
+            </button>
+
+          </div>
+          
+
+          {/* TODO rest of the page is the workout history page itself */}
+
           {/* 
-          <WorkoutCatalog />
-          <SocialPlatform />
-          <Calendar /> */}
+              TODO:<SocialPlatform />
+              TODO:<Calendar /> 
+          */}
         </div>
       </div>
-      <button onClick={handleSignOut} className="btn btn-primary mt-3">
-        Sign Out
-      </button>
+      <p>Workout history page here</p>
+
     </div>
   );
 };
