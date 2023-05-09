@@ -1,15 +1,52 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import the useNavigate hook
+import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginSignUpPage.scss';
 
 const LoginSignUpPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const navigate = useNavigate(); // Create a navigate variable
+  const navigate = useNavigate();
 
   const toggleLoginSignUp = () => {
     setIsLogin(!isLogin);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isLogin) {
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      if (!validatePassword(password)) {
+        alert('Password is too weak.');
+        return;
+      }
+    }
+
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    navigate('/dashboard');
+  };
+
+  const validateEmail = (email) => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validatePassword = (password) => {
+    // At least 6 characters, 1 uppercase letter, 1 lowercase letter, and 1 number
+    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+    return re.test(password);
   };
 
   return (
@@ -17,32 +54,52 @@ const LoginSignUpPage = () => {
       <div className="card w-75">
         <div className="card-body">
           <h2 className="card-title text-center">{isLogin ? 'Login' : 'Sign Up'}</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             {!isLogin && (
               <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input type="text" className="form-control" id="username" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
               </div>
             )}
             <div className="form-group">
               <label htmlFor="email">Email address</label>
-              <input type="email" className="form-control" id="email" />
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input type="password" className="form-control" id="password" />
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             {!isLogin && (
               <div className="form-group">
                 <label htmlFor="confirmPassword">Confirm Password</label>
-                <input type="password" className="form-control" id="confirmPassword" />
+                <input
+                  type="password"
+                  className="form-control"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
               </div>
             )}
-            <button
-              type="submit"
-              className="btn btn-primary w-100 mt-3"
-              onClick={() => navigate('/dashboard')} // Redirect to dashboard if login is successful
-            >
+            <button type="submit" className="btn btn-primary w-100 mt-3">
               {isLogin ? 'Login' : 'Sign Up'}
             </button>
           </form>
@@ -59,6 +116,7 @@ const LoginSignUpPage = () => {
       <Link to="/" className="mt-3">Return to Home Page</Link>
     </div>
   );
+  
 };
 
 export default LoginSignUpPage;

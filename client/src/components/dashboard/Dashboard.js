@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dashboard.scss';
 
 // Import your components here, for example:
-// import ExerciseCatalog from './ExerciseCatalog';
-// import WorkoutTracker from './WorkoutTracker';
+import ExerciseCatalog from '../exerciseCatalog/ExerciseCatalog';
+import WorkoutTracker from '../workoutTracker/WorkoutTracker';
 // import WorkoutCatalog from './WorkoutCatalog';
 // import SocialPlatform from './SocialPlatform';
 // import Calendar from './Calendar';
@@ -25,7 +25,13 @@ const Dashboard = () => {
           <h2 className="card-title text-center">Dashboard</h2>
           <p>Welcome to your dashboard!</p>
           {/* Add your dashboard components here, for example: */}
-          {/* <ExerciseCatalog />
+
+          {/* Put a menu here for these services */}
+          
+          {/* {<WorkoutTracker />} */}
+
+          {/* {<ExerciseCatalog /> */
+          /* 
           <WorkoutTracker />
           <WorkoutCatalog />
           <SocialPlatform />

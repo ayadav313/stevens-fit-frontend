@@ -11,22 +11,23 @@ const Exercise = ({ exercise }) => {
   return (
     <div className="exercise-item card" onClick={toggleDetails}>
       <h4 className="card-header">{exercise.name}</h4>
-      {showDetails && (
-        <div className="card-body">
-          <p>Target: {exercise.target}</p>
-          <p>Body Part: {exercise.bodyPart}</p>
-          <p>Equipment: {exercise.equipment}</p>
-          <img src={exercise.gifUrl} alt={exercise.name} className="img-fluid" />
-          {/* Add any additional exercise information here */}
-        </div>
-      )}
+      <div className="card-body" style={{ display: showDetails ? 'block' : 'none' }}>
+        <p>Target: {exercise.target}</p>
+        <p>Body Part: {exercise.bodyPart}</p>
+        <p>Equipment: {exercise.equipment}</p>
+        <img src={exercise.gifUrl} alt={exercise.name} className="img-fluid" />
+        {/* Add any additional exercise information here */}
+      </div>
     </div>
   );
 };
 
+
 const ExerciseCatalog = () => {
   const [exercises, setExercises] = useState([]);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   const fetchExercises = async () => {
     try {
@@ -48,14 +49,29 @@ const ExerciseCatalog = () => {
     fetchExercises();
   }, []);
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredExercises = exercises.filter((exercise) =>
+    exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="exercise-catalog">
       <h3>Exercise Catalog</h3>
+      <input
+        type="text"
+        placeholder="Search by exercise name"
+        value={searchTerm}
+        onChange={handleSearchChange}
+        className="search-input"
+      />
       {error ? (
         <p className="error-message">Failed to load exercises: {error}</p>
       ) : (
         <div className="exercises-list row row-cols-1 row-cols-md-5 g-4">
-          {exercises.map((exercise) => (
+          {filteredExercises.map((exercise) => (
             <div key={exercise._id} className="col">
               <Exercise exercise={exercise} />
             </div>
@@ -63,7 +79,6 @@ const ExerciseCatalog = () => {
         </div>
       )}
     </div>
-
   );
 };
 
