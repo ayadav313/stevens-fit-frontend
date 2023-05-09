@@ -15,6 +15,7 @@ import WorkoutTracker from '../workoutTracker/WorkoutTracker';
 // import WorkoutCatalog from './WorkoutCatalog';
 // import SocialPlatform from './SocialPlatform';
 // import Calendar from './Calendar';
+import WorkoutHistory from '../workoutHistory/WorkoutHistory';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -60,12 +61,11 @@ const Dashboard = () => {
               Sign Out
             </button>
           </div>
-          {/* TODO Workout history component placed here */}
           {/* TODO: <SocialPlatform /> /}
           {/* TODO: <Calendar /> */}
         </div>
       </div>
-      <p>Workout history page here</p>
+      <WorkoutHistory />
     </div>
   );
 };

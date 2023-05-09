@@ -12,6 +12,7 @@ const Exercise = ({ exercise }) => {
     setShowDetails(!showDetails);
   };
 
+
   return (
     <div className="exercise-item card" onClick={toggleDetails}>
       <h4 className="card-header">{exercise.name}</h4>
@@ -31,6 +32,8 @@ const ExerciseCatalog = () => {
   const [exercises, setExercises] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+
+  
 
   const fetchExercises = async () => {
     try {
@@ -52,22 +55,25 @@ const ExerciseCatalog = () => {
     fetchExercises();
   }, []);
 
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const filteredExercises = exercises.filter((exercise) =>
-    exercise.name.toLowerCase().includes(searchTerm.toLowerCase())
+    exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    exercise.bodyPart.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    exercise.target.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    exercise.equipment.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   return (
     <div className="exercise-catalog container-fluid">
       <h3 className="text-center mb-3">Exercise Catalog</h3>
       <div className="row justify-content-center mb-3">
         <div className="col-12 col-md-6 col-lg-4">
-          <input
+        <input
             type="text"
-            placeholder="Search by exercise name"
+            placeholder="Search by name, body part, target, or equipment"
             value={searchTerm}
             onChange={handleSearchChange}
             className="form-control"
