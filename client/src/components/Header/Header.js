@@ -5,9 +5,10 @@ import './Header.scss';
 const Header = () => {
   return (
     <header className="header">
-      <h1>Stevens Fit</h1>
-      <nav>
-        <ul className="nav-links">
+      <h1 className="header-title">Stevens Fit</h1>
+      {/* TODO: put subtext to the header-title: here is the subtext: The Ultimate Fitness App for Stevens Students */}
+      <nav className="header-nav">
+        <ul className="nav-links d-flex flex-column flex-md-row align-items-center justify-content-md-between">
           <li>
             <NavLink to="/" activeClassName="active" exact>
               Home

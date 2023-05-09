@@ -12,9 +12,9 @@ const Exercise = ({ exercise }) => {
     <div className="exercise-item card" onClick={toggleDetails}>
       <h4 className="card-header">{exercise.name}</h4>
       <div className="card-body" style={{ display: showDetails ? 'block' : 'none' }}>
-        <p>Target: {exercise.target}</p>
-        <p>Body Part: {exercise.bodyPart}</p>
-        <p>Equipment: {exercise.equipment}</p>
+        <p className="exercise-details">Target: {exercise.target}</p>
+        <p className="exercise-details">Body Part: {exercise.bodyPart}</p>
+        <p className="exercise-details">Equipment: {exercise.equipment}</p>
         <img src={exercise.gifUrl} alt={exercise.name} className="img-fluid" />
         {/* Add any additional exercise information here */}
       </div>
@@ -27,7 +27,6 @@ const ExerciseCatalog = () => {
   const [exercises, setExercises] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-
 
   const fetchExercises = async () => {
     try {
@@ -58,19 +57,23 @@ const ExerciseCatalog = () => {
   );
 
   return (
-    <div className="exercise-catalog">
-      <h3>Exercise Catalog</h3>
-      <input
-        type="text"
-        placeholder="Search by exercise name"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        className="search-input"
-      />
+    <div className="exercise-catalog container-fluid">
+      <h3 className="text-center mb-3">Exercise Catalog</h3>
+      <div className="row justify-content-center mb-3">
+        <div className="col-12 col-md-6 col-lg-4">
+          <input
+            type="text"
+            placeholder="Search by exercise name"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="form-control"
+          />
+        </div>
+      </div>
       {error ? (
         <p className="error-message">Failed to load exercises: {error}</p>
       ) : (
-        <div className="exercises-list row row-cols-1 row-cols-md-5 g-4">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
           {filteredExercises.map((exercise) => (
             <div key={exercise._id} className="col">
               <Exercise exercise={exercise} />

@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dashboard.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
 // Import your components here, for example:
 import ExerciseCatalog from '../exerciseCatalog/ExerciseCatalog';
@@ -18,21 +20,27 @@ const Dashboard = () => {
     navigate('/');
   };
 
+  const handleExerciseCatalog = () => {
+    navigate('/exercise-catalog');
+  };
+
   return (
     <div className="dashboard d-flex flex-column justify-content-center align-items-center vh-100">
       <div className="card w-75">
         <div className="card-body">
+          <div className="d-flex justify-content-end">
+            <button onClick={handleExerciseCatalog} className="btn btn-link">
+              Exercise Catalog <FontAwesomeIcon icon={faDumbbell} size="2x" />
+            </button>
+          </div>
           <h2 className="card-title text-center">Dashboard</h2>
           <p>Welcome to your dashboard!</p>
           {/* Add your dashboard components here, for example: */}
-
-          {/* Put a menu here for these services */}
           
           {/* {<WorkoutTracker />} */}
 
-          {/* {<ExerciseCatalog /> */
-          /* 
-          <WorkoutTracker />
+          {/* {<ExerciseCatalog /> */}
+          {/* 
           <WorkoutCatalog />
           <SocialPlatform />
           <Calendar /> */}
