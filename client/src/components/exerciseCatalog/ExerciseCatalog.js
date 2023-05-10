@@ -6,11 +6,15 @@ const ExerciseCatalog = () => {
   const [exercises, setExercises] = useState([]);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [session, setSession] = useState('');
 
   const fetchExercises = async () => {
     try {
-      const response = await fetch('http://localhost:3000/exercises');
-
+      // const response = await fetch('http://localhost:3000/exercises');
+      const response = await fetch('http://localhost:3000/exercises', {
+        credentials: "include",
+        session: session
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }

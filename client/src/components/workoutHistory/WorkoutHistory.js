@@ -81,6 +81,9 @@ const WorkoutHistoryItem = ({log}) => {
 
 
 const WorkoutHistory = () => {
+
+
+
   return (
     <div className="workout-history">
       <h2>Workout History</h2>

@@ -77,7 +77,7 @@ const WorkoutCreate = () => {
   };
   return (
     <div className="workout-create container">
-      <h3 className="text-center mb-3">Create Workout</h3>
+      <h3 className="text-center my-5">Create Workout</h3>
       <div className="row justify-content-center mb-3">
         <div className="col-12 col-md-6 col-lg-4">
           <input

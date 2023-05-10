@@ -3,13 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginSignUpPage.scss';
 
+
+
 const LoginSignUpPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const [session, setSession] = useState('');
   const navigate = useNavigate();
 
   const toggleLoginSignUp = () => {
@@ -18,7 +20,22 @@ const LoginSignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    if(password.trim().length == 0 ){
+      alert('Password is required.');
+      return;
+    }
+
     if (!isLogin) {
+      if(username.trim().length == 0 ){
+        alert('Name is required.');
+        return;
+      }
       if (password !== confirmPassword) {
         alert('Passwords do not match.');
         return;
@@ -28,15 +45,71 @@ const LoginSignUpPage = () => {
         alert('Password is too weak.');
         return;
       }
-    }
 
-    if (!validateEmail(email)) {
-      alert('Please enter a valid email address.');
-      return;
-    }
+      const userData = { username: username, email: email,  password: password }
+      createUser(userData);
+    }else{
+      const userData = { username: username, email: email,  password: password }
+      loginUser(userData);
+  }
+};
 
-    navigate('/dashboard');
-  };
+  async function loginUser(data) {
+
+    try {
+      console.log("login user called");
+      const response = await fetch("http://localhost:3000/users/check/email", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      const status = await response.status 
+      const result = await response.json();
+      if (status == 201){
+        const session = await response.session;
+        setSession(session);
+        navigate('/dashboard');
+      }else{
+        loginFailed(result.message);
+      }
+      console.log("response :", result);
+    } catch (error) {
+      loginFailed(error.message)
+    }
+  }
+
+  function loginFailed(message){
+    alert("Login failed " + message);
+    navigate('/login')
+    }
+
+  async function createUser(data) {
+    try {
+      const response = await fetch("http://localhost:3000/users", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      const result = await response.json();
+      console.log("Success:", result);
+      navigate('/dashboard')
+    } catch (error) {
+      CreateUserFailed(error.message);
+    }
+  }
+
+  function CreateUserFailed(message){
+    alert("Create User failed " + message);
+    navigate('/login')
+    }
 
   const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -120,3 +193,41 @@ const LoginSignUpPage = () => {
 };
 
 export default LoginSignUpPage;
+
+/**
+ * const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    if(password.trim().length == 0 ){
+      alert('Password is required.');
+      return;
+    }
+
+    if (!isLogin) {
+      if(username.trim().length == 0 ){
+        alert('Name is required.');
+        return;
+      }
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      if (!validatePassword(password)) {
+        alert('Password is too weak.');
+        return;
+      }
+
+      const userData = { username: username, email: email,  password: password }
+      createUser(userData);
+    }else{
+      const userData = { username: username, email: email,  password: password }
+      loginUser(userData);
+    }
+  };
+ */
