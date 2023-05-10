@@ -75,5 +75,3 @@ Create an intuitive and visually appealing front-end design for the Stevens Fit 
 - Use Jest and React Testing Library for unit and integration testing
 - Test UI components, Redux actions, and reducers
 - Ensure app is responsive and accessible
-
-By following this front-end overview, you will create a seamless user experience for the Stevens Fit app, allowing students to effectively plan, track, and achieve their fitness goals while engaging with the social aspects of the app.
