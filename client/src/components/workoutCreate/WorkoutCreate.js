@@ -66,9 +66,6 @@ const WorkoutCreate = () => {
     return errors.length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
   const createWorkout = async () => {
     console.log(exerciseInputs[0]);
     const exercises = [];
@@ -95,10 +92,14 @@ const WorkoutCreate = () => {
     console.log(response);
     //TODO: Add redirect after successful insert
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+  
 
     if (validateForm()) {
       console.log('Form is valid, submit the workout');
-      // submit the workout
+      createWorkout();
       navigate('/dashboard');
     }
   };
