@@ -79,7 +79,7 @@ const WorkoutCreate = () => {
       exercises.push(currentObj);
     }
     const workoutObj = {};
-    workoutObj.name = "Temp name";
+    workoutObj.name = workoutName;
     workoutObj.creator = "NEED TO FIGURE OUT HOW TO GET USER ID HERE";
     workoutObj.exercises = exercises;
     const response = await fetch('http://localhost:3000/workouts', {
@@ -132,7 +132,7 @@ const WorkoutCreate = () => {
           Add Exercise
         </button>
         {/* Add the submit button for the entire form */}
-        <button className="btn btn-primary">Submit Workout</button>
+        <button className="btn btn-primary" onClick={handleSubmit}>Submit Workout</button>
       </div>
       {formErrors.length > 0 && (
         <ul className="error-message">
