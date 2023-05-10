@@ -9,6 +9,8 @@ import ExerciseCatalog from './components/exerciseCatalog/ExerciseCatalog';
 import WorkoutCatalog from './components/workoutCatalog/WorkoutCatalog';
 import WorkoutTracker from './components/workoutTracker/WorkoutTracker';
 import WorkoutHistory from './components/workoutHistory/WorkoutHistory';
+
+import WorkoutCreate from './components/workoutCreate/WorkoutCreate';
 // import SocialPlatform from './components/socialPlatform/SocialPlatform';
 // import Calendar from './components/calendar/Calendar';
 
@@ -27,6 +29,7 @@ function App() {
           <Route path="/workout-catalog" element={<WorkoutCatalog />} />
           <Route path="/workout-tracker" element={<WorkoutTracker />} />
           <Route path="/workout-history" element={<WorkoutHistory />} />
+          <Route path="/workout-create" element={<WorkoutCreate />} />
           {/* />
           /> */}
           {/* <Route path="/social-platform" component={SocialPlatform} />

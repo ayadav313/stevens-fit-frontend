@@ -8,6 +8,7 @@ import {
   faSignOutAlt,
   faCalendarPlus,
   faRunning,
+  faDumbbell,
 } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
@@ -29,10 +30,22 @@ const Dashboard = () => {
   const handleWorkoutHistory = () => {
     navigate('/workout-history');
   };
+
+  const handleWorkoutCreate = () => {
+    navigate('/workout-create');
+  };
+
   return (
     <div className="dashboard d-flex flex-column align-items-center justify-content-center vh-100">
         <h1 className='m-5'>Welcome!</h1>
         <div className="d-flex flex-row">
+          <div className="d-flex flex-column align-items-center mx-4">
+          <button onClick={handleWorkoutCreate} className="btn btn-success btn-icon btn-lg my-4">
+            <FontAwesomeIcon icon={faDumbbell} />
+          </button>
+          <span>Create Workout</span>
+
+          </div>
           <div className="d-flex flex-column align-items-center mx-4">
             <button onClick={handleWorkoutCatalog} className="btn btn-primary btn-icon btn-lg my-4">
               <FontAwesomeIcon icon={faRunning} />

@@ -12,6 +12,9 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+import './WorkoutHistory.scss';
+
+
 const workoutLogs = [
   {
     _id: '90g0d5e96h1234567890abcd',
@@ -52,7 +55,16 @@ const workoutStatsDummy = {
 };
 
 const WorkoutHistoryItem = ({log}) => {
-  const date = new Date(log.date).toLocaleDateString();
+  const date = new Date(log.date).toLocaleString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric'
+  });
+  
   const exerciseList = log.exerciseLogs.map((exercise, index) => (
     <li key={index}>
       <strong>{exercise.name}</strong>: {exercise.sets} sets x {exercise.reps} reps
@@ -61,7 +73,7 @@ const WorkoutHistoryItem = ({log}) => {
 
   return (
     <div className="workout-history-item">
-      <h3>{date}</h3>
+      <div className="workout-history-item__date">{date}</div>
       <ul>{exerciseList}</ul>
     </div>
   );
