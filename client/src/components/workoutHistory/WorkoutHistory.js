@@ -1,20 +1,8 @@
 import React from 'react';
-import {
-  PieChart,
-  Pie,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
-
 import './WorkoutHistory.scss';
-
-
+import { Card, CardContent, Typography, List, ListItem, ListItemText } from '@mui/material';
+import Exercise from '../common/Exercise';
+import Workout from '../common/Workout';
 const workoutLogs = [
   {
     _id: '90g0d5e96h1234567890abcd',
@@ -22,6 +10,49 @@ const workoutLogs = [
     workoutId: '80f9c3d94g1234567890abcd',
     date: '2023-03-23T00:00:00.000Z',
     exerciseLogs: [
+      {
+        exerciseId: '70e9b2c83f1234567890abce',
+        name: 'Squats',
+        sets: 4,
+        reps: 12,
+        notes: 'Struggled on the last set, need to work on form.',
+      },
+      {
+        exerciseId: '70e9b2c83f1234567890abcd',
+        name: 'Bench Press',
+        sets: 3,
+        reps: 10,
+        notes: 'Felt strong today, increased weight by 5 lbs.',
+      },
+      {
+        exerciseId: '70e9b2c83f1234567890abce',
+        name: 'Squats',
+        sets: 4,
+        reps: 12,
+        notes: 'Struggled on the last set, need to work on form.',
+      },
+    ],
+  },
+  {
+    _id: '90g0d5e96h1234567890abcd',
+    userId: '60f8a4872d1234567890abcd',
+    workoutId: '80f9c3d94g1234567890abcd',
+    date: '2023-03-23T00:00:00.000Z',
+    exerciseLogs: [
+      {
+        exerciseId: '70e9b2c83f1234567890abce',
+        name: 'Squats',
+        sets: 4,
+        reps: 12,
+        notes: 'Struggled on the last set, need to work on form.',
+      },
+      {
+        exerciseId: '70e9b2c83f1234567890abce',
+        name: 'Squats',
+        sets: 4,
+        reps: 12,
+        notes: 'Struggled on the last set, need to work on form.',
+      },
       {
         exerciseId: '70e9b2c83f1234567890abcd',
         name: 'Bench Press',
@@ -39,7 +70,6 @@ const workoutLogs = [
     ],
   },
 ];
-
 const workoutStatsDummy = {
   workoutTypes: [
     { name: 'Strength', value: 6 },
@@ -54,7 +84,7 @@ const workoutStatsDummy = {
   ],
 };
 
-const WorkoutHistoryItem = ({log}) => {
+const WorkoutHistoryItem = ({ log }) => {
   const date = new Date(log.date).toLocaleString('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -62,64 +92,51 @@ const WorkoutHistoryItem = ({log}) => {
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    second: 'numeric'
+    second: 'numeric',
   });
-  
+
   const exerciseList = log.exerciseLogs.map((exercise, index) => (
-    <li key={index}>
-      <strong>{exercise.name}</strong>: {exercise.sets} sets x {exercise.reps} reps
-    </li>
+    <ListItem key={index} disablePadding>
+      <Exercise
+        exercise={{
+          ...exercise,
+          target: exercise.target,
+          bodyPart: exercise.bodyPart,
+          equipment: exercise.equipment,
+          gifUrl: exercise.gifUrl,
+        }}
+      />
+    </ListItem>
   ));
 
   return (
-    <div className="workout-history-item">
-      <div className="workout-history-item__date">{date}</div>
-      <ul>{exerciseList}</ul>
-    </div>
+    <Card className="workout-history-item" sx={{ marginBottom: 2 }}>
+      <CardContent>
+        <Typography variant="h6" component="div" gutterBottom>
+          {date}
+        </Typography>
+        <div className="content-container">
+          <div className="workout-container">
+            <Workout workout={log} />
+          </div>
+          <div className="exercise-list-container">
+            <List>{exerciseList}</List>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
-
 const WorkoutHistory = () => {
-
-
-
   return (
-    <div className="workout-history">
-      <h2>Workout History</h2>
+    <div className="workout-history container mt-5">
       {workoutLogs.map((log) => (
         <WorkoutHistoryItem key={log._id} log={log} />
       ))}
-
-      {/* <h2>Workout Statistics</h2>
-      <div className="graphs">
-        <ResponsiveContainer width="100%" height={300}>
-          <PieChart>
-            <Pie
-              dataKey="value"
-              isAnimationActive={false}
-              data={workoutStatsDummy.workoutTypes}
-              outerRadius={80}
-              fill="#8884d8"
-              label
-            />
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
-
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={workoutStatsDummy.workoutFrequency}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="count" fill="#8884d8" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div> */}
     </div>
   );
 };
 
 export default WorkoutHistory;
+
