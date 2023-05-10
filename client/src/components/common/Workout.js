@@ -3,21 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const fetchExercise = async (exerciseId) => {
-    // const dummyExercises = {
-    //   '612db8f48a7c18bf22004b0a': {
-    //     _id: '612db8f48a7c18bf22004b0a',
-    //     name: 'Push-ups',
-    //   },
-    //   '612db8f48a7c18bf22004b0b': {
-    //     _id: '612db8f48a7c18bf22004b0b',
-    //     name: 'Squats',
-    //   },
-    // };
-  
-    // return dummyExercises[exerciseId];
     const response = await fetch("http://localhost:3000/exercises/" + exerciseId)
-    const out = response.json();
-    return out;
+    return response.json();
 
   };
   
