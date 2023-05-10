@@ -46,8 +46,7 @@ const Workout = ({ workout }) => {
       <div className="workout-item card">
         <h4 className="card-header">{workout.name}</h4>
         <div className="card-body">
-          <p>Creator: {workout.creator}</p>
-          <h5>Exercises:</h5>
+          <h5>Exercises</h5>
             {error ? (
               <p className="error-message">Failed to load exercises: {error}</p>
               ) : isLoading ? (
@@ -70,6 +69,8 @@ const Workout = ({ workout }) => {
                 ))}
               </ul>
             )}
+          <p> ~ {workout.creator}</p>
+
           <button className="btn btn-primary" onClick={startWorkout}>
     Start
   </button>

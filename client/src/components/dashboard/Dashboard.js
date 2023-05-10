@@ -20,6 +20,10 @@ import {
 const Dashboard = () => {
   const navigate = useNavigate();
 
+  const user = JSON.parse(window.localStorage.getItem('user'));
+  const username = user.username; 
+
+
   const handleSignOut = () => {
     window.localStorage.removeItem('user');
     navigate('/');
@@ -43,7 +47,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard d-flex flex-column align-items-center justify-content-center vh-100">
-        <h1 className='m-5'>Welcome!</h1>
+        <h1 className='m-5'>Welcome {username}!</h1>
         <div className="d-flex flex-row">
           <div className="d-flex flex-column align-items-center mx-4">
           <button onClick={handleWorkoutCreate} className="btn btn-success btn-icon btn-lg my-4">

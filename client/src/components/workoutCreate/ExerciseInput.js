@@ -1,6 +1,5 @@
 import React from 'react';
 import './ExerciseInput.scss';
-
 const ExerciseInput = ({ exerciseOptions, exercise, setExercise }) => {
   return (
     <div className="container">

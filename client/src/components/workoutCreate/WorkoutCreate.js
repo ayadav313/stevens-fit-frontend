@@ -38,9 +38,14 @@ const WorkoutCreate = () => {
     setExerciseInputs([...exerciseInputs, { id: exerciseInputs.length, selectedExercise: '', sets: '', reps: '' }]);
   };
 
+const delExerciseInput = () => {
+  //TODO
+}
+
   const setExerciseInput = (id, exercise) => {
     setExerciseInputs(exerciseInputs.map((input) => (input.id === id ? exercise : input)));
   };
+
   const validateForm = () => {
     const errors = [];
 
@@ -83,10 +88,11 @@ const WorkoutCreate = () => {
     workoutObj.name = workoutName;
     
     const user = JSON.parse(window.localStorage.getItem('user'));
-    console.log(user);
     workoutObj.creator = user.username;
 
     workoutObj.exercises = exercises;
+    console.log(exercises);
+
     const response = await fetch('http://localhost:3000/workouts', {
       method: 'POST',
       headers: {
@@ -135,8 +141,9 @@ const WorkoutCreate = () => {
             placeholder="Workout name"
             value={workoutName}
             onChange={(e) => setWorkoutName(e.target.value)}
-            className="form-control"
+            className="form-control mb-3"
           />
+          
         </div>
       </div>
       {error && <p className="error-message">Failed to load exercises: {error}</p>}
@@ -150,11 +157,18 @@ const WorkoutCreate = () => {
             />
           </div>
         ))}
-        <button className="btn btn-primary" onClick={addExerciseInput}>
-          Add Exercise
-        </button>
-        {/* Add the submit button for the entire form */}
-        <button className="btn btn-primary" onClick={handleSubmit}>Submit Workout</button>
+        <div className="col-12 text-center">
+        <button className="btn btn-primary btn-sm" onClick={addExerciseInput}>
+            Add Exercise
+          </button>
+          <button className="btn btn-primary btn-sm" onClick={delExerciseInput}>
+            Delete Exercise
+          </button>
+          <button className="btn btn-primary btn-sm" onClick={handleSubmit}>
+            Submit Workout
+          </button>
+          
+        </div>
       </div>
       {formErrors.length > 0 && (
         <ul className="error-message">
@@ -165,9 +179,5 @@ const WorkoutCreate = () => {
       )}
     </div>
   );
-  
-  
-  
 };
-
 export default WorkoutCreate;
