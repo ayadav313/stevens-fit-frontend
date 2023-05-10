@@ -46,6 +46,7 @@ const WorkoutTracker = () => {
 
 
   const handleSubmit = () => {
+    //TODO: POST
     console.log('Workout saved successfully!', { workoutId: workoutData._id, exerciseLogs });
     alert('Workout saved successfully!');
     navigate('/dashboard');
@@ -65,7 +66,7 @@ const WorkoutTracker = () => {
     <div key={idx} className="exercise-log card mb-3 p-3">
       {exerciseData ? (
         <>
-        {/* TODO INSTEAD OF THESE 3 LINES UNDERNEATH JUST USE MY EXERCISE COMPONENT. YOU HAVE THE THINGS NEEDED TO BUILD EXERCISE. */}
+        {/* INSTEAD OF THESE 3 LINES UNDERNEATH JUST USE MY EXERCISE COMPONENT. YOU HAVE THE THINGS NEEDED TO BUILD EXERCISE. */}
           {/* <h4 className="card-title">{exerciseData.name}</h4>
           <p className="card-text">Sets: {exercise.sets}</p>
           <p className="card-text">Reps: {exercise.reps}</p>

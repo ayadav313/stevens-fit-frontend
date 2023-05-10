@@ -9,6 +9,7 @@ const WorkoutHistory = () => {
   useEffect(() => {
     const fetchWorkoutLogs = async () => {
       try {
+        // TODO:  CALL API /WORKOUTLOGS/{USER ID} NOT ALL WORKOUT LOGS
         const response = await fetch('http://localhost:3000/workoutLogs/');
         const data = await response.json();
         setWorkoutLogs(data);
