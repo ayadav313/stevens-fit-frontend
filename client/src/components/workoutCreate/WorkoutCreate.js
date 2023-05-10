@@ -67,7 +67,8 @@ const WorkoutCreate = () => {
   };
 
   const createWorkout = async () => {
-    console.log(exerciseInputs[0]);
+    // console.log(exerciseInputs[0]);
+
     const exercises = [];
     for(let i = 0; i < exerciseInputs.length; i++){
       const currentExercise = exerciseInputs[i];
@@ -80,7 +81,11 @@ const WorkoutCreate = () => {
     }
     const workoutObj = {};
     workoutObj.name = workoutName;
-    workoutObj.creator = "NEED TO FIGURE OUT HOW TO GET USER ID HERE";
+    
+    const user = JSON.parse(window.localStorage.getItem('user'));
+    console.log(user);
+    workoutObj.creator = user.username;
+
     workoutObj.exercises = exercises;
     const response = await fetch('http://localhost:3000/workouts', {
       method: 'POST',
@@ -90,8 +95,25 @@ const WorkoutCreate = () => {
       body: JSON.stringify({ workoutObj })
     });
     console.log(response);
+    
     //TODO: Add redirect after successful insert
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    navigate('/dashboard');
   }
+
+  // const formData = () => {
+  //   const user = JSON.parse(window.localStorage.getItem('user'));
+  //   let workout = {
+  //     name: workoutName,
+  //     creator: user.username,
+  //     exercises: exerciseInputs
+  //   }
+  //   return workout;
+  // };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 

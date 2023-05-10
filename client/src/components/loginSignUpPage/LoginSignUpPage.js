@@ -70,8 +70,9 @@ const LoginSignUpPage = () => {
       const status = await response.status 
       const result = await response.json();
       if (status == 201){
-        const session = await response.session;
-        setSession(session);
+        // const session = await response.session;
+        // setSession(session);
+        window.localStorage.setItem('user', JSON.stringify(result));
         navigate('/dashboard');
       }else{
         loginFailed(result.message);
