@@ -14,8 +14,17 @@ import WorkoutCreate from './components/workoutCreate/WorkoutCreate';
 // import SocialPlatform from './components/socialPlatform/SocialPlatform';
 // import Calendar from './components/calendar/Calendar';
 
+import { Navigate } from 'react-router-dom';
+
+
 import './index.scss';
 import Layout from './components/Layout';
+
+const PrivateRoute = ({ children }) => {
+  const user = JSON.parse(window.localStorage.getItem('user'));
+
+  return user ? children : <Navigate to="/login" />;
+};
 
 function App() {
   return (
@@ -24,12 +33,12 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginSignUpPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/exercise-catalog" element={<ExerciseCatalog />} />
-          <Route path="/workout-catalog" element={<WorkoutCatalog />} />
-          <Route path="/workout-tracker" element={<WorkoutTracker />} />
-          <Route path="/workout-history" element={<WorkoutHistory />} />
-          <Route path="/workout-create" element={<WorkoutCreate />} />
+          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/exercise-catalog" element={<PrivateRoute><ExerciseCatalog /></PrivateRoute>} />
+          <Route path="/workout-catalog" element={<PrivateRoute><WorkoutCatalog /></PrivateRoute>} />
+          <Route path="/workout-tracker" element={<PrivateRoute><WorkoutTracker /></PrivateRoute>} />
+          <Route path="/workout-history" element={<PrivateRoute><WorkoutHistory /></PrivateRoute>} />
+          <Route path="/workout-create" element={<PrivateRoute><WorkoutCreate /></PrivateRoute>} />
           {/* />
           /> */}
           {/* <Route path="/social-platform" component={SocialPlatform} />

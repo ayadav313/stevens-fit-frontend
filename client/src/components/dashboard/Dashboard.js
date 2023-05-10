@@ -1,5 +1,6 @@
-import React from 'react';
+//import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dashboard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,11 +12,16 @@ import {
   faDumbbell,
 } from '@fortawesome/free-solid-svg-icons';
 
+
+// INFO
+// const user = JSON.parse(window.localStorage.getItem('user')); 
+// the line above will put user into the user var if it exists. 
+
 const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    // Perform any sign-out actions here, such as clearing authentication tokens
+    window.localStorage.removeItem('user');
     navigate('/');
   };
 
