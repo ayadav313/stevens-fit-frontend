@@ -66,12 +66,40 @@ const WorkoutCreate = () => {
     return errors.length === 0;
   };
 
+  const createWorkout = async () => {
+    console.log(exerciseInputs[0]);
+    const exercises = [];
+    for(let i = 0; i < exerciseInputs.length; i++){
+      const currentExercise = exerciseInputs[i];
+      const currentObj = {};
+      currentObj.exerciseId = currentExercise.selectedExercise;
+      currentObj.sets = currentExercise.sets;
+      currentObj.reps = currentExercise.reps;
+      currentObj.additionalDetails = currentExercise.notes;
+      exercises.push(currentObj);
+    }
+    const workoutObj = {};
+    workoutObj.name = workoutName;
+    workoutObj.creator = "NEED TO FIGURE OUT HOW TO GET USER ID HERE";
+    workoutObj.exercises = exercises;
+    const response = await fetch('http://localhost:3000/workouts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ workoutObj })
+    });
+    console.log(response);
+    //TODO: Add redirect after successful insert
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
 
+  
+
     if (validateForm()) {
       console.log('Form is valid, submit the workout');
-      // submit the workout
+      createWorkout();
       navigate('/dashboard');
     }
   };
@@ -100,20 +128,11 @@ const WorkoutCreate = () => {
             />
           </div>
         ))}
-      </div>
-      <div className="row justify-content-center mt-3">
-        <div className="col-12 col-md-6 col-lg-4 text-center">
-          <button className="btn btn-primary" onClick={addExerciseInput}>
-            <FontAwesomeIcon icon={faPlus} /> Add Exercise
-          </button>
-        </div>
-      </div>
-      <div className="row justify-content-center mt-3">
-        <div className="col-12 col-md-6 col-lg-4 text-center">
-          <button onClick={handleSubmit} className="btn btn-success">
-            <FontAwesomeIcon icon={faCheck} /> Submit Workout
-          </button>
-        </div>
+        <button className="btn btn-primary" onClick={addExerciseInput}>
+          Add Exercise
+        </button>
+        {/* Add the submit button for the entire form */}
+        <button className="btn btn-primary" onClick={handleSubmit}>Submit Workout</button>
       </div>
       {formErrors.length > 0 && (
         <ul className="error-message">

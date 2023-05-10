@@ -9,10 +9,10 @@ const WorkoutCatalog = () => {
 
   const fetchWorkouts = async () => {
     // Comment out the API request
-    /*
+    
     try {
       const response = await fetch('http://localhost:3000/workouts');
-
+      console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -23,7 +23,7 @@ const WorkoutCatalog = () => {
       console.error('Failed to fetch workouts:', error);
       setError(error.message);
     }
-    */
+    
 
     // Use dummy data
     const dummyData = [
@@ -61,7 +61,7 @@ const WorkoutCatalog = () => {
       },
     ];
 
-    setWorkouts(dummyData);
+    //setWorkouts(dummyData);
   };
 
   useEffect(() => {

@@ -30,6 +30,7 @@ const WorkoutTracker = () => {
   if (!workout) {
     return <div>Loading...</div>;
   }
+  console.log(workout);
 
   return (
     <div className="workout-tracker container">
