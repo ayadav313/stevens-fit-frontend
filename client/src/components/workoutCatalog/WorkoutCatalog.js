@@ -9,10 +9,10 @@ const WorkoutCatalog = () => {
 
   const fetchWorkouts = async () => {
     // Comment out the API request
-    /*
+    
     try {
       const response = await fetch('http://localhost:3000/workouts');
-
+      console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -23,45 +23,45 @@ const WorkoutCatalog = () => {
       console.error('Failed to fetch workouts:', error);
       setError(error.message);
     }
-    */
+    
 
-    // Use dummy data
-    const dummyData = [
-      {
-        _id: "1",
-        name: "Workout 1",
-        creator: "John",
-        exerciseLogs: [
-          {
-            exerciseId: "612db8f48a7c18bf22004b0a",
-            sets: 3,
-            reps: 8,
-            additionalDetails: "Rest two minutes between sets",
-          },
-        ],
-      },
-      {
-        _id: "2",
-        name: "Workout 2",
-        creator: "Jane",
-        exerciseLogs: [
-          {
-            exerciseId: "612db8f48a7c18bf22004b0b",
-            sets: 4,
-            reps: 12,
-            additionalDetails: "Rest one minute between sets",
-          },
-          {
-            exerciseId: "612db8f48a7c18bf22004b0b",
-            sets: 4,
-            reps: 12,
-            additionalDetails: "Rest one minute between sets",
-          },
-        ],
-      },
-    ];
+    // // Use dummy data
+    // const dummyData = [
+    //   {
+    //     _id: "1",
+    //     name: "Workout 1",
+    //     creator: "John",
+    //     exerciseLogs: [
+    //       {
+    //         exerciseId: "612db8f48a7c18bf22004b0a",
+    //         sets: 3,
+    //         reps: 8,
+    //         additionalDetails: "Rest two minutes between sets",
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     _id: "2",
+    //     name: "Workout 2",
+    //     creator: "Jane",
+    //     exerciseLogs: [
+    //       {
+    //         exerciseId: "612db8f48a7c18bf22004b0b",
+    //         sets: 4,
+    //         reps: 12,
+    //         additionalDetails: "Rest one minute between sets",
+    //       },
+    //       {
+    //         exerciseId: "612db8f48a7c18bf22004b0b",
+    //         sets: 4,
+    //         reps: 12,
+    //         additionalDetails: "Rest one minute between sets",
+    //       },
+    //     ],
+    //   },
+    // ];
 
-    setWorkouts(dummyData);
+    // setWorkouts(dummyData);
   };
 
   useEffect(() => {

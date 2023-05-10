@@ -35,6 +35,33 @@ const WorkoutCreate = () => {
     setExerciseInputs(exerciseInputs.map((input) => (input.id === id ? exercise : input)));
   };
 
+  const createWorkout = async () => {
+    console.log(exerciseInputs[0]);
+    const exercises = [];
+    for(let i = 0; i < exerciseInputs.length; i++){
+      const currentExercise = exerciseInputs[i];
+      const currentObj = {};
+      currentObj.exerciseId = currentExercise.selectedExercise;
+      currentObj.sets = currentExercise.sets;
+      currentObj.reps = currentExercise.reps;
+      currentObj.additionalDetails = currentExercise.notes;
+      exercises.push(currentObj);
+    }
+    const workoutObj = {};
+    workoutObj.name = "Temp name";
+    workoutObj.creator = "NEED TO FIGURE OUT HOW TO GET USER ID HERE";
+    workoutObj.exercises = exercises;
+    const response = await fetch('http://localhost:3000/workouts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ workoutObj })
+    });
+    console.log(response);
+    //TODO: Add redirect after successful insert
+  }
+
   return (
     <div className="workout-create container-fluid">
       <h3 className="text-center mb-3">Create Workout</h3>
@@ -52,7 +79,7 @@ const WorkoutCreate = () => {
           Add Exercise
         </button>
         {/* Add the submit button for the entire form */}
-        <button className="btn btn-primary">Submit Workout</button>
+        <button className="btn btn-primary" onClick={createWorkout}>Submit Workout</button>
       </div>
     </div>
   );
