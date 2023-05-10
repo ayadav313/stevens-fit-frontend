@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const WorkoutTracker = () => {
   const location = useLocation();
   const workoutData = location.state ? location.state.workoutData : null;
   const [workout, setWorkout] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (workoutData) {
@@ -22,9 +24,10 @@ const WorkoutTracker = () => {
   };
 
   const handleSubmit = () => {
-    // Removed the API call; you can add any desired action here
+    // TODO: handleSubmit()
     console.log('Workout saved successfully!', { workoutId: workoutData._id, exerciseLogs });
     alert('Workout saved successfully!');
+    navigate('/dashboard');
   };
 
   if (!workout) {

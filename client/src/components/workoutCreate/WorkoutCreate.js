@@ -38,9 +38,12 @@ const WorkoutCreate = () => {
     setExerciseInputs([...exerciseInputs, { id: exerciseInputs.length, selectedExercise: '', sets: '', reps: '' }]);
   };
 
-const delExerciseInput = () => {
-  //TODO
-}
+  const delExerciseInput = () => {
+    // Remove the last element from the array
+    const newInputs = exerciseInputs.slice(0, -1);
+    setExerciseInputs(newInputs);
+  };
+  
 
   const setExerciseInput = (id, exercise) => {
     setExerciseInputs(exerciseInputs.map((input) => (input.id === id ? exercise : input)));
@@ -102,7 +105,6 @@ const delExerciseInput = () => {
     });
     console.log(response);
     
-    //TODO: Add redirect after successful insert
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }

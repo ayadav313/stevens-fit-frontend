@@ -46,7 +46,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard d-flex flex-column align-items-center justify-content-center vh-100">
+    <div className="dashboard d-flex flex-column align-items-center justify-content-top vh-100">
         <h1 className='m-5'>Welcome {username}!</h1>
         <div className="d-flex flex-row">
           <div className="d-flex flex-column align-items-center mx-4">
@@ -86,6 +86,8 @@ const Dashboard = () => {
             <span>Sign Out</span>
           </div>
         </div>
+
+
     </div>
   );
   
