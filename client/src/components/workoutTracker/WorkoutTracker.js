@@ -45,8 +45,8 @@ const WorkoutTracker = () => {
   };
 
 
-
   const postWorkoutLog = async (userId, workoutId, date, exerciseLogs) => {
+
     const response = await fetch('http://localhost:3000/workoutLogs', {
       method: 'POST',
       headers: {
