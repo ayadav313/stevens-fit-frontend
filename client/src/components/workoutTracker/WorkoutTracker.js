@@ -45,8 +45,31 @@ const WorkoutTracker = () => {
 
 
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     //TODO: POST
+    // const response = await fetch('http://localhost:3000/workouts', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({ workoutObj })
+    // });
+    const exerciseLogs = [];
+
+
+    const workoutLogObj = {};
+    workoutLogObj.userId = JSON.parse(window.localStorage.getItem('user'));
+    workoutLogObj.workoutId = "TEMP"; //TODO: Figure out how to get workoutID here
+    workoutLogObj.date = Date.now().toString(); //TODO: Change date
+    workoutLogObj.exerciseLogs = workout.exerciseLogs;
+
+    const response = await fetch("http://localhost:3000/workoutLogs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(workoutLogObj)
+    });
     console.log('Workout saved successfully!', { workoutId: workoutData._id, exerciseLogs });
     alert('Workout saved successfully!');
     navigate('/dashboard');
@@ -57,6 +80,7 @@ const WorkoutTracker = () => {
   }
 
   console.log(workout.exerciseLogs);
+
   return (
     <div className="workout-tracker container">
       <h3 className="my-4">{workout.name}</h3>

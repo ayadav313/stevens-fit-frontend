@@ -94,7 +94,6 @@ const WorkoutCreate = () => {
     workoutObj.creator = user.username;
 
     workoutObj.exercises = exercises;
-    console.log(exercises);
 
     const response = await fetch('http://localhost:3000/workouts', {
       method: 'POST',
