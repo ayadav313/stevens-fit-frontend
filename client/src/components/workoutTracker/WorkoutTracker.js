@@ -83,6 +83,7 @@ const WorkoutTracker = () => {
   }
 
   console.log(workout.exerciseLogs);
+
   return (
     <div className="workout-tracker container">
       <h3 className="my-4">{workout.name}</h3>
