@@ -6,11 +6,18 @@ import WorkoutHistoryItem from './WorkoutHistoryItem';
 const WorkoutHistory = () => {
   const [workoutLogs, setWorkoutLogs] = useState([]);
 
+  //TODO TEST WORKOUTLOGS/USER-ID
   useEffect(() => {
     const fetchWorkoutLogs = async () => {
       try {
-        // TODO:  CALL API /WORKOUTLOGS/{USER ID} NOT ALL WORKOUT LOGS
-        const response = await fetch('http://localhost:3000/workoutLogs/');
+        const user = JSON.parse(window.localStorage.getItem('user'));
+        console.log(user._id);
+        const response = await fetch(`http://localhost:3000/workoutLogs/${user._id}`);
+
+        if(!response.ok)
+        {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
         setWorkoutLogs(data);
       } catch (error) {

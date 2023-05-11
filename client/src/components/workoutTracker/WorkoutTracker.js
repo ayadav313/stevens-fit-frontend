@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Exercise from '../common/Exercise';
+import Workout from '../common/Workout';
 
 const WorkoutTracker = () => {
   const location = useLocation();
@@ -45,11 +46,36 @@ const WorkoutTracker = () => {
 
 
 
-  const handleSubmit = () => {
-    //TODO: POST
-    console.log('Workout saved successfully!', { workoutId: workoutData._id, exerciseLogs });
-    alert('Workout saved successfully!');
-    navigate('/dashboard');
+  const postWorkoutLog = async (userId, workoutId, date, exerciseLogs) => {
+    const response = await fetch('http://localhost:3000/workoutLogs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, workoutId, date, exerciseLogs }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error('Failed to save workout log');
+    }
+  };
+
+
+  //TODO TEST IF THIS WORKS
+  const handleSubmit = async () => {
+    try {
+      const user = JSON.parse(window.localStorage.getItem('user'));
+      const log = await postWorkoutLog(user._id, workoutData._id, new Date(), exerciseLogs);
+      console.log('Workout saved successfully!', log);
+      alert('Workout saved successfully!');
+      navigate('/dashboard');
+    } catch (e) {
+      console.error(e);
+      alert('Failed to save workout log');
+    }
   };
 
   if (!workout) {
@@ -66,29 +92,22 @@ const WorkoutTracker = () => {
     <div key={idx} className="exercise-log card mb-3 p-3">
       {exerciseData ? (
         <>
-        {/* INSTEAD OF THESE 3 LINES UNDERNEATH JUST USE MY EXERCISE COMPONENT. YOU HAVE THE THINGS NEEDED TO BUILD EXERCISE. */}
-          {/* <h4 className="card-title">{exerciseData.name}</h4>
-          <p className="card-text">Sets: {exercise.sets}</p>
-          <p className="card-text">Reps: {exercise.reps}</p>
-          {exercise.weight && <p className="card-text">Weight: {exercise.weight} lbs</p>}
-          {exercise.restTime && <p className="card-text">Rest time: {exercise.restTime} sec</p>}
-          {exercise.notes && <p className="card-text">Notes: {exercise.notes}</p>} */}
           <div className="row">
-          <div className="col-md-6">
-            <Exercise exercise={exerciseData} />
-          </div>
-          <div className="col-md-6">
-          <div className="input-group mb-3">
-            <span className="input-group-text">Sets performed:</span>
-            <input
-              type="number"
-              className="form-control"
-              onChange={(e) =>
-                handleSetReps(exercise.exerciseId, Number(e.target.value), exercise.reps)
-              }
-            />
-          </div>
-          <div className="input-group mb-3">
+          <div className='col-md-4'>
+            
+            <div className='row-md-6 mt-3 text-center'>
+              <h2 className='mb-4'> Finish {exercise.reps} reps</h2>
+
+              <h2 className='mb-4'>Finish {exercise.sets} sets</h2>
+
+    
+            </div>
+
+
+             </div>
+
+          <div className="col-md-4">
+          <div className="input-group mt-3">
             <span className="input-group-text">Reps performed:</span>
             <input
               type="number"
@@ -98,6 +117,22 @@ const WorkoutTracker = () => {
               }
             />
           </div>
+          <div className="input-group mt-3">
+            <span className="input-group-text">Sets performed:</span>
+            <input
+              type="number"
+              className="form-control"
+              onChange={(e) =>
+                handleSetReps(exercise.exerciseId, Number(e.target.value), exercise.reps)
+              }
+            />
+          </div>
+  
+          </div>
+
+          <div className="col-md-4">
+          <Exercise exercise={exerciseData} />
+
           </div>
           </div>
         </>
@@ -105,8 +140,8 @@ const WorkoutTracker = () => {
         <p>Loading...</p>
       )}
     </div>
-  );
-})}
+      );
+    })}
       <button className="btn btn-primary" onClick={handleSubmit}>Submit Workout</button>
     </div>
   );
